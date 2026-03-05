@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng nhập — LIS Admin</title>
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="login-page">
+
+<div class="login-box">
+  <div class="login-logo">
+    <div class="brand">LIS</div>
+    <p>Admin Panel</p>
+  </div>
+  <h2>Đăng nhập</h2>
+  <div class="login-error" id="login-error"></div>
+  <form id="login-form" onsubmit="handleLogin(event)">
+    <div class="form-group" style="margin-bottom:16px">
+      <label for="username">Tên đăng nhập</label>
+      <input type="text" id="username" class="input" placeholder="admin" autocomplete="username" required>
+    </div>
+    <div class="form-group" style="margin-bottom:24px">
+      <label for="password">Mật khẩu</label>
+      <input type="password" id="password" class="input" placeholder="••••••••" autocomplete="current-password" required>
+    </div>
+    <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;padding:12px" id="login-btn">
+      Đăng nhập
+    </button>
+  </form>
+</div>
+
+<script src="../js/admin.js"></script>
+<script>
+  // Nếu đã login thì redirect
+  if (Auth.isLoggedIn()) location.href = 'dashboard.html';
+
+  async function handleLogin(e) {
+    e.preventDefault();
+    const btn = document.getElementById('login-btn');
+    const errEl = document.getElementById('login-error');
+    errEl.style.display = 'none';
+    btn.disabled = true;
+    btn.textContent = 'Đang đăng nhập...';
+
+    try {
+      const data = await API.post('/api/auth/login', {
+        username: document.getElementById('username').value,
+        password: document.getElementById('password').value,
+      });
+      Auth.login(data.token, data.admin);
+      location.href = 'dashboard.html';
+    } catch (err) {
+      errEl.style.display = 'block';
+      errEl.textContent = err.message;
+      btn.disabled = false;
+      btn.textContent = 'Đăng nhập';
+    }
+  }
+</script>
+</body>
+</html>

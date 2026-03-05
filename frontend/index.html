@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LIS — Life is Sport | Vớ Thể Thao Cao Cấp</title>
+  <meta name="description" content="Vớ thể thao LIS — Co giãn 4 chiều, đế dày 5mm bấm chống trượt, logo thêu nổi. Giao hàng toàn quốc, đổi trả 7 ngày.">
+  <link rel="icon" href="assets/logo_lis.png">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Reveal animation */
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity .65s ease, transform .65s ease; }
+    .reveal.revealed { opacity:1; transform:none; }
+    .reveal-delay-1 { transition-delay:.1s; }
+    .reveal-delay-2 { transition-delay:.2s; }
+    .reveal-delay-3 { transition-delay:.3s; }
+    .empty-msg { color:var(--gray); font-size:15px; grid-column:1/-1; padding:40px 0; text-align:center; }
+  </style>
+</head>
+<body>
+
+<!-- ── ANNOUNCEMENT ── -->
+<div class="announce">
+  <span id="announce-text">🚚 Miễn phí vận chuyển cho đơn từ 300K · Đổi trả 7 ngày không cần lý do</span>
+</div>
+
+<!-- ── NAV ── -->
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/logo_lis.png" alt="LIS" onerror="this.style.display='none'">
+      <div class="nav-logo-text">
+        <span class="brand">LIS</span>
+        <span class="sub">Life is Sport</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Trang chủ</a></li>
+      <li><a href="pages/products.html">Sản phẩm</a></li>
+      <li><a href="#features">Tính năng</a></li>
+      <li><a href="#reviews">Đánh giá</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="pages/cart.html" class="cart-btn" title="Giỏ hàng">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span data-cart-count style="display:none">0</span>
+      </a>
+      <a href="pages/products.html" class="btn-nav">Mua ngay</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 70% 50%, rgba(26,36,114,.6), transparent);pointer-events:none;z-index:1"></div>
+
+  <div class="hero-content" style="position:relative;z-index:2">
+    <div class="hero-eyebrow">▶ Chính hãng · Ra mắt 2025</div>
+    <h1>
+      VỚ THỂ THAO<br>
+      <em>ĐỈNH CAO</em><br>
+      <span class="outline">HIỆU SUẤT</span>
+    </h1>
+    <p class="hero-desc">
+      <strong>Co giãn 4 chiều</strong> · <strong>Đế dày 5mm chống trượt</strong> ·
+      <strong>Logo LIS thêu nổi</strong>.<br>
+      Được tạo ra cho người chơi thật — không chỉ để trông đẹp.
+    </p>
+    <div class="hero-actions">
+      <a href="pages/products.html" class="btn btn-gold btn-lg">🛒 Xem sản phẩm</a>
+      <a href="#features" class="btn btn-outline btn-lg">Tìm hiểu thêm</a>
+    </div>
+    <ul class="hero-trust">
+      <li>Đổi trả 7 ngày</li>
+      <li>Hàng chính hãng</li>
+      <li>Giao toàn quốc</li>
+    </ul>
+  </div>
+
+  <div class="hero-visual" style="position:relative;z-index:2">
+    <div class="hero-ring-wrap">
+      <div class="hero-ring-deco"></div>
+      <div class="hero-ring">
+        <span style="font-size:80px">🧦</span>
+      </div>
+      <div class="hero-badge b1">Co giãn 4D</div>
+      <div class="hero-badge b2">Logo thêu LIS</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STATS ── -->
+<div class="stats">
+  <div class="stats-item"><div class="stats-num">4D</div><div class="stats-lbl">Co giãn đa chiều</div></div>
+  <div class="stats-item"><div class="stats-num">5mm</div><div class="stats-lbl">Độ dày đế bấm</div></div>
+  <div class="stats-item"><div class="stats-num">500+</div><div class="stats-lbl">Khách tin dùng</div></div>
+  <div class="stats-item"><div class="stats-num">5★</div><div class="stats-lbl">Đánh giá TB</div></div>
+</div>
+
+<!-- ── FEATURED PRODUCTS ── -->
+<section class="section section--alt" id="products">
+  <div class="section-inner">
+    <div class="eyebrow reveal">Bán chạy nhất</div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px">
+      <h2 class="section-title reveal reveal-delay-1" style="margin-bottom:0">SẢN PHẨM <em>NỔI BẬT</em></h2>
+      <a href="pages/products.html" class="btn btn-outline btn-sm reveal reveal-delay-2">Xem tất cả →</a>
+    </div>
+    <div class="product-grid" id="featured-grid">
+      <!-- Skeleton loading -->
+      <div class="product-card skeleton" style="height:340px"></div>
+      <div class="product-card skeleton" style="height:340px"></div>
+      <div class="product-card skeleton" style="height:340px"></div>
+      <div class="product-card skeleton" style="height:340px"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ── -->
+<section class="section" id="features">
+  <div class="section-inner">
+    <div class="eyebrow reveal">Tính năng nổi bật</div>
+    <h2 class="section-title reveal reveal-delay-1">ĐƯỢC LÀM RA <em>ĐỂ CHIẾN ĐẤU</em></h2>
+    <div class="features-grid reveal reveal-delay-2">
+      <div class="feat">
+        <div class="feat-num">01</div>
+        <div class="feat-name">Chất liệu co giãn</div>
+        <p class="feat-desc">Sợi Spandex co giãn 4 chiều, ôm sát bàn chân, không xộc xệch dù vận động mạnh suốt buổi tập dài.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-num">02</div>
+        <div class="feat-name">Đế dày bấm chống trượt</div>
+        <p class="feat-desc">Lớp đệm dày 5mm tại gót và mũi chân, bấm silicon chống trượt, giảm chấn thương khi chạy và nhảy.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-num">03</div>
+        <div class="feat-name">Logo LIS thêu nổi</div>
+        <p class="feat-desc">Logo thêu nổi chắc chắn, bền màu sau hàng trăm lần giặt máy, không bong tróc, không phai màu.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-num">04</div>
+        <div class="feat-name">Thoáng khí tối ưu</div>
+        <p class="feat-desc">Cấu trúc dệt thoáng vùng mu bàn chân, thoát nhiệt nhanh, giữ chân khô thoáng cả buổi dài.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRODUCT DETAIL HIGHLIGHT ── -->
+<section class="section section--alt">
+  <div class="section-inner">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center">
+      <div class="reveal">
+        <div style="aspect-ratio:1/1;background:linear-gradient(145deg,var(--navy3),var(--navy));border-radius:12px;border:1px solid rgba(245,166,35,.15);display:flex;align-items:center;justify-content:center;font-size:100px;position:relative;overflow:hidden">
+          🧦
+          <div style="position:absolute;top:16px;left:16px;background:var(--gold);color:var(--navy);font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;padding:5px 12px;border-radius:2px;text-transform:uppercase">Chính hãng LIS</div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <div class="eyebrow">Chi tiết sản phẩm</div>
+        <h2 class="section-title" style="margin-bottom:28px">VỚ THỂ THAO <em>LIS PRO</em></h2>
+        <div style="display:flex;flex-direction:column;gap:0">
+          <div style="display:flex;gap:16px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.06)">
+            <div style="width:42px;height:42px;background:rgba(245,166,35,.1);border:1px solid rgba(245,166,35,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🧵</div>
+            <div><div style="font-size:14px;font-weight:700;margin-bottom:3px">Chất liệu</div><div style="font-size:13px;color:rgba(255,255,255,.5)">80% Cotton · 15% Spandex · 5% Nylon</div></div>
+          </div>
+          <div style="display:flex;gap:16px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.06)">
+            <div style="width:42px;height:42px;background:rgba(245,166,35,.1);border:1px solid rgba(245,166,35,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">👟</div>
+            <div><div style="font-size:14px;font-weight:700;margin-bottom:3px">Size</div><div style="font-size:13px;color:rgba(255,255,255,.5)">S (35–38) · M (39–42) · L (43–45)</div></div>
+          </div>
+          <div style="display:flex;gap:16px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.06)">
+            <div style="width:42px;height:42px;background:rgba(245,166,35,.1);border:1px solid rgba(245,166,35,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🎨</div>
+            <div><div style="font-size:14px;font-weight:700;margin-bottom:3px">Màu sắc</div><div style="font-size:13px;color:rgba(255,255,255,.5)">Đen · Trắng · Navy · Đỏ · Xanh + nhiều màu</div></div>
+          </div>
+          <div style="display:flex;gap:16px;padding:16px 0">
+            <div style="width:42px;height:42px;background:rgba(245,166,35,.1);border:1px solid rgba(245,166,35,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🏆</div>
+            <div><div style="font-size:14px;font-weight:700;margin-bottom:3px">Phù hợp</div><div style="font-size:13px;color:rgba(255,255,255,.5)">Bóng đá · Gym · Chạy bộ · Cầu lông · Bóng rổ</div></div>
+          </div>
+        </div>
+        <a href="pages/products.html" class="btn btn-gold" style="margin-top:24px">Xem tất cả sản phẩm →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── REVIEWS ── -->
+<section class="section" id="reviews">
+  <div class="section-inner">
+    <div class="eyebrow reveal">Phản hồi thực tế</div>
+    <h2 class="section-title reveal reveal-delay-1">KHÁCH HÀNG <em>NÓI GÌ</em></h2>
+    <div class="reviews-grid">
+      <div class="review reveal">
+        <div class="review-head"><div class="review-avatar">MK</div><div><div class="review-name">Minh Khoa</div><div class="review-sub">Cầu thủ phong trào · TP.HCM</div></div></div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Mang thử 1 buổi bóng đá là nghiện luôn. Đế dày nên chạy nhẹ hơn hẳn, không đau gót sau 2 tiếng chơi."</p>
+      </div>
+      <div class="review reveal reveal-delay-1">
+        <div class="review-head"><div class="review-avatar">TN</div><div><div class="review-name">Thảo Nguyên</div><div class="review-sub">Runner · Hà Nội</div></div></div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Giặt 20 lần rồi mà logo LIS vẫn đẹp như mới, chất vải co giãn vẫn tốt. Mua thêm 5 đôi nữa rồi."</p>
+      </div>
+      <div class="review reveal reveal-delay-2">
+        <div class="review-head"><div class="review-avatar">TA</div><div><div class="review-name">Tuấn Anh</div><div class="review-sub">Personal Trainer · Gym owner</div></div></div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Đặt thử 1 đôi, xài 1 tuần quay lại đặt cả chục đôi cho team gym. Chất lượng xứng đáng với giá."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta" id="order">
+  <div class="cta-inner">
+    <h2>LIFE IS<br>SPORT</h2>
+    <p>Đặt hàng ngay hôm nay. Đổi trả trong 7 ngày nếu không vừa ý — không cần lý do.</p>
+    <div class="cta-btns">
+      <a href="pages/products.html" class="btn-cta-dark">🛒 Mua ngay</a>
+      <a href="https://zalo.me/0901234567" class="btn-cta-outline">💬 Tư vấn Zalo</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo">LIS</div>
+      <p>Life is Sport — Vớ thể thao cao cấp được làm ra cho người chơi thật. Co giãn, bền bỉ, không xộc xệch.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Sản phẩm</h4>
+      <ul>
+        <li><a href="pages/products.html?category=vo-the-thao">Vớ thể thao</a></li>
+        <li><a href="pages/products.html?category=vo-bong-da">Vớ bóng đá</a></li>
+        <li><a href="pages/products.html?category=combo">Combo tiết kiệm</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Hỗ trợ</h4>
+      <ul>
+        <li><a href="pages/track.html">Tra cứu đơn hàng</a></li>
+        <li><a href="#">Đổi trả hàng</a></li>
+        <li><a href="#">Hướng dẫn chọn size</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Liên hệ</h4>
+      <ul>
+        <li><a href="tel:0901234567">📞 0901 234 567</a></li>
+        <li><a href="https://zalo.me/0901234567">💬 Zalo tư vấn</a></li>
+        <li><a href="#">📍 TP. Hồ Chí Minh</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Life is Sport — LIS. All rights reserved.</p>
+    <p>Hàng chính hãng · Đổi trả 7 ngày · Giao toàn quốc</p>
+  </div>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

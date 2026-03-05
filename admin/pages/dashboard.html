@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — LIS Admin</title>
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+<!-- Sidebar injected by sidebar.js -->
+
+<div class="main">
+  <div class="topbar">
+    <span class="topbar-title">Dashboard</span>
+    <div class="topbar-right">
+      <span class="admin-badge" data-admin-name>Admin</span>
+    </div>
+  </div>
+  <div class="content">
+
+    <!-- Stat cards -->
+    <div class="stat-cards" id="stat-cards">
+      <div class="stat-card skeleton" style="height:90px"></div>
+      <div class="stat-card skeleton" style="height:90px"></div>
+      <div class="stat-card skeleton" style="height:90px"></div>
+      <div class="stat-card skeleton" style="height:90px"></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+
+      <!-- Recent orders -->
+      <div class="panel">
+        <div class="panel-header">
+          <span class="panel-title">Đơn hàng mới nhất</span>
+          <a href="orders.html" class="btn btn-ghost btn-sm">Xem tất cả →</a>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Mã đơn</th><th>Khách hàng</th><th>Tổng</th><th>Trạng thái</th></tr>
+            </thead>
+            <tbody id="recent-orders-body">
+              <tr><td colspan="4" style="text-align:center;color:var(--gray);padding:24px">Đang tải...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Quick stats -->
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <div class="panel">
+          <div class="panel-header"><span class="panel-title">Trạng thái đơn hàng</span></div>
+          <div class="panel-body" id="order-status-chart">
+            <div style="color:var(--gray);font-size:13px">Đang tải...</div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-header"><span class="panel-title">Thao tác nhanh</span></div>
+          <div class="panel-body" style="display:flex;flex-direction:column;gap:10px">
+            <a href="products.html?action=add" class="btn btn-primary" style="justify-content:center">+ Thêm sản phẩm mới</a>
+            <a href="orders.html?status=pending" class="btn btn-secondary" style="justify-content:center">📋 Xem đơn chờ xử lý</a>
+            <a href="../frontend/index.html" target="_blank" class="btn btn-secondary" style="justify-content:center">🌐 Xem trang bán hàng</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="../js/admin.js"></script>
+<script src="../js/sidebar.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', loadDashboard);
+
+async function loadDashboard() {
+  try {
+    const { stats, recent_orders } = await API.get('/api/orders');
+
+    // Stat cards
+    document.getElementById('stat-cards').innerHTML = `
+      <div class="stat-card gold">
+        <div class="stat-card-label">Doanh thu</div>
+        <div class="stat-card-value">${fmt.price(stats.revenue)}</div>
+        <div class="stat-card-sub">Tổng từ trước đến nay</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-card-label">Tổng đơn</div>
+        <div class="stat-card-value">${stats.total}</div>
+        <div class="stat-card-sub">Tất cả đơn hàng</div>
+      </div>
+      <div class="stat-card" style="--c:#d29922">
+        <div class="stat-card-label">Chờ xác nhận</div>
+        <div class="stat-card-value" style="color:#d29922">${stats.pending}</div>
+        <div class="stat-card-sub">Cần xử lý ngay</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-card-label">Hoàn thành</div>
+        <div class="stat-card-value">${stats.completed}</div>
+        <div class="stat-card-sub">Đơn đã giao thành công</div>
+      </div>
+    `;
+
+    // Recent orders
+    const tbody = document.getElementById('recent-orders-body');
+    if (!recent_orders?.length) {
+      tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:var(--gray);padding:24px">Chưa có đơn hàng</td></tr>';
+    } else {
+      tbody.innerHTML = recent_orders.slice(0, 8).map(o => `
+        <tr style="cursor:pointer" onclick="location.href='orders.html?id=${o.id}'">
+          <td><span style="font-family:monospace;font-size:12px;color:var(--gold)">${o.order_code}</span></td>
+          <td>
+            <div style="font-weight:600;font-size:13px">${o.customer_name}</div>
+            <div style="font-size:11px;color:var(--gray)">${o.customer_phone}</div>
+          </td>
+          <td style="font-weight:700;color:var(--gold)">${fmt.price(o.total)}</td>
+          <td>${statusBadge(o.status)}</td>
+        </tr>
+      `).join('');
+    }
+
+    // Order status chart (simple bar)
+    document.getElementById('order-status-chart').innerHTML = `
+      <div style="display:flex;flex-direction:column;gap:10px">
+        ${Object.entries(STATUS).map(([key, s]) => {
+          const count = stats[key] || 0;
+          const pct = stats.total > 0 ? Math.round(count / stats.total * 100) : 0;
+          return `
+            <div>
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px">
+                <span style="color:var(--gray)">${s.label}</span>
+                <span style="font-weight:700">${count}</span>
+              </div>
+              <div style="background:var(--bg3);border-radius:3px;height:6px;overflow:hidden">
+                <div style="height:100%;border-radius:3px;background:var(--gold);width:${pct}%;transition:width .8s ease"></div>
+              </div>
+            </div>`;
+        }).join('')}
+      </div>
+    `;
+
+  } catch (e) {
+    toast('Lỗi tải dữ liệu: ' + e.message, 'error');
+  }
+}
+</script>
+</body>
+</html>
