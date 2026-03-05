@@ -1,11 +1,16 @@
-// admin/js/admin.js — Shared utilities
-const API_BASE = 'http://localhost/lis/backend';
+// admin/js/admin.js
+// ══════════════════════════════════════════
+//  ⚠️  SỬA DÒNG NÀY THEO MÔI TRƯỜNG:
+//  Local:      'http://localhost:8080/LIS/backend'
+//  Production: 'https://yourdomain.com/LIS/backend'
+// ══════════════════════════════════════════
+const API_BASE = 'http://localhost:8080/LIS/backend';
 
-// ── Auth helpers ──
+// ── Auth ──
 const Auth = {
-  getToken()    { return localStorage.getItem('lis_admin_token'); },
-  getAdmin()    { try { return JSON.parse(localStorage.getItem('lis_admin_info')); } catch { return null; } },
-  isLoggedIn()  { return !!this.getToken(); },
+  getToken()   { return localStorage.getItem('lis_admin_token'); },
+  getAdmin()   { try { return JSON.parse(localStorage.getItem('lis_admin_info')); } catch { return null; } },
+  isLoggedIn() { return !!this.getToken(); },
   login(token, admin) {
     localStorage.setItem('lis_admin_token', token);
     localStorage.setItem('lis_admin_info', JSON.stringify(admin));
@@ -13,43 +18,38 @@ const Auth = {
   logout() {
     localStorage.removeItem('lis_admin_token');
     localStorage.removeItem('lis_admin_info');
-    location.href = 'login.html';
+    location.href = '/LIS/admin/login';
   },
-  // Gọi ở mỗi trang cần auth
   require() {
-    if (!this.isLoggedIn()) { location.href = 'login.html'; throw new Error('Not authenticated'); }
+    if (!this.isLoggedIn()) { location.href = '/LIS/admin/login'; throw new Error('Not authenticated'); }
   },
 };
 
-// ── API client (với auth header) ──
+// ── API client (kèm JWT header) ──
 const API = {
   async request(method, path, body = null) {
     const headers = { 'Content-Type': 'application/json' };
     const token = Auth.getToken();
     if (token) headers['Authorization'] = `Bearer ${token}`;
-
     const opts = { method, headers };
     if (body) opts.body = JSON.stringify(body);
-
-    const res = await fetch(API_BASE + path, opts);
-
+    const res  = await fetch(API_BASE + path, opts);
     if (res.status === 401) { Auth.logout(); return; }
-
     const data = await res.json();
     if (!res.ok) throw new Error(data.message || 'Lỗi server');
     return data;
   },
-  get:    (p)      => API.request('GET', p),
-  post:   (p, b)   => API.request('POST', p, b),
-  put:    (p, b)   => API.request('PUT', p, b),
-  delete: (p)      => API.request('DELETE', p),
+  get:    (p)    => API.request('GET',    p),
+  post:   (p, b) => API.request('POST',   p, b),
+  put:    (p, b) => API.request('PUT',    p, b),
+  delete: (p)    => API.request('DELETE', p),
 };
 
-// ── Upload file (không dùng JSON body) ──
+// ── Upload ảnh ──
 async function uploadImage(file) {
   const form = new FormData();
   form.append('image', file);
-  const res = await fetch(API_BASE + '/api/upload', {
+  const res  = await fetch(API_BASE + '/api/upload', {
     method: 'POST',
     headers: { 'Authorization': `Bearer ${Auth.getToken()}` },
     body: form,
@@ -62,7 +62,7 @@ async function uploadImage(file) {
 // ── Toast ──
 function toast(msg, type = 'info') {
   let wrap = document.getElementById('toast-wrap');
-  if (!wrap) { wrap = Object.assign(document.createElement('div'), { id: 'toast-wrap' }); document.body.appendChild(wrap); }
+  if (!wrap) { wrap = document.createElement('div'); wrap.id = 'toast-wrap'; document.body.appendChild(wrap); }
   const t = document.createElement('div');
   t.className = `toast ${type}`;
   t.textContent = msg;
@@ -73,12 +73,12 @@ function toast(msg, type = 'info') {
 
 // ── Format ──
 const fmt = {
-  price: n => Number(n).toLocaleString('vi-VN') + 'đ',
-  date:  s => new Date(s).toLocaleString('vi-VN', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' }),
+  price:     n => Number(n).toLocaleString('vi-VN') + 'đ',
+  date:      s => new Date(s).toLocaleString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
   shortDate: s => new Date(s).toLocaleDateString('vi-VN'),
 };
 
-// ── Status map ──
+// ── Status ──
 const STATUS = {
   pending:    { label: 'Chờ xác nhận', cls: 'status-pending' },
   processing: { label: 'Đang xử lý',   cls: 'status-processing' },
@@ -91,20 +91,13 @@ function statusBadge(s) {
   return `<span class="status ${st.cls}">${st.label}</span>`;
 }
 
-// ── Confirm dialog ──
-function confirm(msg) {
-  return window.confirm(msg);
-}
-
-// ── Render admin name ──
 document.addEventListener('DOMContentLoaded', () => {
   const admin = Auth.getAdmin();
   document.querySelectorAll('[data-admin-name]').forEach(el => {
     if (admin) el.textContent = admin.name || admin.username;
   });
-  // Mark active nav
-  const path = location.pathname.split('/').pop();
+  const page = location.pathname.split('/').pop();
   document.querySelectorAll('.nav-item[data-page]').forEach(el => {
-    el.classList.toggle('active', el.dataset.page === path);
+    el.classList.toggle('active', el.dataset.page === page);
   });
 });

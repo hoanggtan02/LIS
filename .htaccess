@@ -1,0 +1,23 @@
+Options -Indexes
+
+RewriteEngine On
+
+# Nếu là file/folder thật thì cho qua (vendor, uploads, v.v.)
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# /LIS/admin hoặc /LIS/admin/* → admin/pages/login.html (router admin xử lý tiếp)
+RewriteRule ^admin/?$           admin/pages/login.html [L]
+RewriteRule ^admin/login/?$     admin/pages/login.html [L]
+RewriteRule ^admin/dashboard/?$ admin/pages/dashboard.html [L]
+RewriteRule ^admin/products/?$  admin/pages/products.html [L]
+RewriteRule ^admin/orders/?$    admin/pages/orders.html [L]
+RewriteRule ^admin/settings/?$  admin/pages/settings.html [L]
+
+# /LIS/backend/* → PHP router
+RewriteRule ^backend/(.*)$ backend/index.php [QSA,L]
+
+# Tất cả còn lại → frontend/index.html (landing page)
+RewriteRule ^$          frontend/index.html [L]
+RewriteRule ^index\.html$ frontend/index.html [L]
