@@ -78,12 +78,42 @@
     <link rel="apple-touch-icon" href="uploads/logo_lis.jpg">
 
     <!-- ── PERFORMANCE ── -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Non-blocking font load - fixes render-blocking resource -->
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=DM+Sans:wght@400;600&display=swap">
     <link
-        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap"
-        rel="stylesheet">
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=DM+Sans:wght@400;600&display=swap"
+        rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=DM+Sans:wght@400;600&display=swap"
+            rel="stylesheet">
+    </noscript>
     <style>
+        /* Skip link accessibility */
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 16px;
+            background: var(--gold, #f5a623);
+            color: #0f1445;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 14px;
+            z-index: 9999;
+            text-decoration: none;
+            transition: top .2s;
+        }
+
+        .skip-link:focus {
+            top: 16px;
+        }
+
         :root {
             --navy: #1a2472;
             --navy2: #141b5c;
@@ -105,6 +135,19 @@
 
         html {
             scroll-behavior: smooth;
+        }
+
+        /* Ensure font-display swap for system fallback while fonts load */
+        @font-face {
+            font-family: 'Barlow Condensed';
+            font-display: swap;
+            src: local('Barlow Condensed');
+        }
+
+        @font-face {
+            font-family: 'DM Sans';
+            font-display: swap;
+            src: local('DM Sans');
         }
 
         body {
@@ -1089,12 +1132,15 @@
 </head>
 
 <body>
+    <a href="#main-content" class="skip-link">Bỏ qua điều hướng</a>
 
     <!-- NAV -->
     <nav>
         <div class="nav-logo">
-            <img src="uploads/logo_lis.jpg" alt="LIS Logo" onerror="this.style.display='none'">
+            <img src="uploads/logo_lis.jpg" alt="LIS Logo" width="40" height="40" loading="eager" decoding="async"
+                onerror="this.style.display='none'">
             <div class="nav-logo-text">
+                <span class="nav-logo-short">LIS</span>
                 <span class="nav-logo-full">Life is Sport</span>
             </div>
         </div>
@@ -1108,280 +1154,295 @@
     </nav>
 
     <!-- HERO -->
-    <section class="hero">
-        <div class="hero-bg-text">LIFE IS SPORT</div>
+    <main id="main-content">
+        <section class="hero">
+            <div class="hero-bg-text">LIFE IS SPORT</div>
 
-        <div class="hero-content">
-            <div class="hero-tag">Ra mắt 2026 · Chính hãng</div>
-            <h1>
-                VỚ THỂ THAO<br>
-                <span class="gold">ĐỈNH CAO</span><br>
-                <span class="outline">HIỆU SUẤT</span>
-            </h1>
-            <p class="hero-desc">
-                <strong>Co giãn 4 chiều</strong> · <strong>Đế dày bấm chống trượt</strong> · <strong>Logo LIS thêu
-                    nổi</strong>.
-                Được làm ra cho người chơi thật — không phải chỉ để trông đẹp.
-            </p>
-            <div class="hero-btns">
-                <a href="#order" class="btn-gold">Đặt hàng ngay</a>
-                <a href="#product" class="btn-outline">Xem chi tiết</a>
+            <div class="hero-content">
+                <div class="hero-tag">Ra mắt 2025 · Chính hãng</div>
+                <h1>
+                    VỚ THỂ THAO<br>
+                    <span class="gold">ĐỈNH CAO</span><br>
+                    <span class="outline">HIỆU SUẤT</span>
+                </h1>
+                <p class="hero-desc">
+                    <strong>Co giãn 4 chiều</strong> · <strong>Đế dày bấm chống trượt</strong> · <strong>Logo LIS thêu
+                        nổi</strong>.
+                    Được làm ra cho người chơi thật — không phải chỉ để trông đẹp.
+                </p>
+                <div class="hero-btns">
+                    <a href="#order" class="btn-gold">Đặt hàng ngay</a>
+                    <a href="#product" class="btn-outline">Xem chi tiết</a>
+                </div>
+                <div class="hero-trust">
+                    <!-- <div class="trust-item">Giao toàn quốc</div> -->
+                    <div class="trust-item">Đổi trả 7 ngày</div>
+                    <div class="trust-item">Hàng chính hãng</div>
+                </div>
             </div>
-            <div class="hero-trust">
-                <!-- <div class="trust-item">Đổi trả 7 ngày</div>
-                <div class="trust-item">Hàng chính hãng</div> -->
+
+            <div class="hero-visual">
+                <div class="product-showcase">
+                    <div class="ring-deco"></div>
+                    <div class="product-ring">
+                        <!-- Thay src bằng ảnh sản phẩm thật -->
+                        <div class="product-placeholder">
+                            <span class="icon">🧦</span>
+                            <span class="lbl">Ảnh sản phẩm</span>
+                        </div>
+                    </div>
+                    <div class="float-badge f1">Co giãn 4D</div>
+                    <div class="float-badge f2">Logo thêu LIS</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STATS BAR -->
+        <div class="stats-bar">
+            <div class="stats-inner">
+                <div class="stat-item fade-up">
+                    <div class="stat-num">4D</div>
+                    <div class="stat-lbl">Co giãn đa chiều</div>
+                </div>
+                <div class="stat-item fade-up" style="transition-delay:.1s">
+                    <div class="stat-num">5mm</div>
+                    <div class="stat-lbl">Độ dày đế bấm</div>
+                </div>
+                <div class="stat-item fade-up" style="transition-delay:.2s">
+                    <div class="stat-num">2+</div>
+                    <div class="stat-lbl">Màu sắc</div>
+                </div>
+                <!-- <div class="stat-item fade-up" style="transition-delay:.3s">
+                    <div class="stat-num">500+</div>
+                    <div class="stat-lbl">Khách hàng tin dùng</div>
+                </div> -->
             </div>
         </div>
 
-        <div class="hero-visual">
-            <div class="product-showcase">
-                <div class="ring-deco"></div>
-                <div class="product-ring">
-                    <!-- Thay src bằng ảnh sản phẩm thật -->
-                    <div class="product-placeholder">
-                        <span class="icon">🧦</span>
-                        <span class="lbl">Ảnh sản phẩm</span>
+        <!-- FEATURES -->
+        <div class="section-wrap features-bg" id="features">
+            <div class="section-inner">
+                <div class="eyebrow">Tính năng nổi bật</div>
+                <h2 class="section-heading">ĐƯỢC LÀM RA<br><span>ĐỂ CHIẾN ĐẤU</span></h2>
+                <div class="features-grid">
+                    <div class="feat-card fade-up">
+                        <div class="feat-num">01</div>
+                        <!-- <span class="feat-icon">🧵</span> -->
+                        <div class="feat-name">Chất liệu co giãn</div>
+                        <p class="feat-desc">Sợi Spandex co giãn 4 chiều, ôm sát bàn chân, không xộc xệch dù vận động
+                            mạnh suốt buổi tập.</p>
                     </div>
-                </div>
-                <div class="float-badge f1">Co giãn 4D</div>
-                <div class="float-badge f2">Logo thêu LIS</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- STATS BAR -->
-    <div class="stats-bar">
-        <div class="stats-inner">
-            <div class="stat-item fade-up">
-                <div class="stat-num">4D</div>
-                <div class="stat-lbl">Co giãn đa chiều</div>
-            </div>
-            <div class="stat-item fade-up" style="transition-delay:.1s">
-                <div class="stat-num">5mm</div>
-                <div class="stat-lbl">Độ dày đế bấm</div>
-            </div>
-            <div class="stat-item fade-up" style="transition-delay:.2s">
-                <div class="stat-num">12+</div>
-                <div class="stat-lbl">Màu sắc</div>
-            </div>
-            <!-- <div class="stat-item fade-up" style="transition-delay:.3s">
-                <div class="stat-num">500+</div>
-                <div class="stat-lbl">Khách hàng tin dùng</div>
-            </div> -->
-        </div>
-    </div>
-
-    <!-- FEATURES -->
-    <div class="section-wrap features-bg" id="features">
-        <div class="section-inner">
-            <div class="eyebrow">Tính năng nổi bật</div>
-            <h2 class="section-heading">ĐƯỢC LÀM RA<br><span>ĐỂ CHIẾN ĐẤU</span></h2>
-            <div class="features-grid">
-                <div class="feat-card fade-up">
-                    <div class="feat-num">01</div>
-                    <!-- <span class="feat-icon">🧵</span> -->
-                    <div class="feat-name">Chất liệu co giãn</div>
-                    <p class="feat-desc">Sợi Spandex co giãn 4 chiều, ôm sát bàn chân, không xộc xệch dù vận động mạnh
-                        suốt buổi tập.</p>
-                </div>
-                <div class="feat-card fade-up" style="transition-delay:.1s">
-                    <div class="feat-num">02</div>
-                    <!-- <span class="feat-icon">🛡️</span> -->
-                    <div class="feat-name">Đế dày bấm</div>
-                    <p class="feat-desc">Lớp đệm dày 5mm tại gót và mũi chân, bấm chống trượt, giảm chấn thương khi chạy
-                        và nhảy.</p>
-                </div>
-                <div class="feat-card fade-up" style="transition-delay:.2s">
-                    <div class="feat-num">03</div>
-                    <!-- <span class="feat-icon">🪡</span> -->
-                    <div class="feat-name">Logo thêu</div>
-                    <p class="feat-desc">Logo thêu nổi chắc chắn, bền màu sau hàng trăm lần giặt, không bong tróc, không
-                        phai.</p>
-                </div>
-                <div class="feat-card fade-up" style="transition-delay:.3s">
-                    <div class="feat-num">04</div>
-                    <!-- <span class="feat-icon">💨</span> -->
-                    <div class="feat-name">Thoáng khí</div>
-                    <p class="feat-desc">Cấu trúc dệt thoáng vùng mu bàn chân, thoát nhiệt nhanh, giữ chân luôn khô
-                        thoáng.</p>
+                    <div class="feat-card fade-up" style="transition-delay:.1s">
+                        <div class="feat-num">02</div>
+                        <!-- <span class="feat-icon">🛡️</span> -->
+                        <div class="feat-name">Đế dày bấm</div>
+                        <p class="feat-desc">Lớp đệm dày 5mm tại gót và mũi chân, bấm chống trượt, giảm chấn thương khi
+                            chạy và nhảy.</p>
+                    </div>
+                    <div class="feat-card fade-up" style="transition-delay:.2s">
+                        <div class="feat-num">03</div>
+                        <!-- <span class="feat-icon">🪡</span> -->
+                        <div class="feat-name">Logo LIS thêu</div>
+                        <p class="feat-desc">Logo thêu nổi chắc chắn, bền màu sau hàng trăm lần giặt, không bong tróc,
+                            không phai.</p>
+                    </div>
+                    <div class="feat-card fade-up" style="transition-delay:.3s">
+                        <div class="feat-num">04</div>
+                        <!-- <span class="feat-icon">💨</span> -->
+                        <div class="feat-name">Thoáng khí</div>
+                        <p class="feat-desc">Cấu trúc dệt thoáng vùng mu bàn chân, thoát nhiệt nhanh, giữ chân luôn khô
+                            thoáng.</p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- PRODUCT DETAIL -->
-    <div class="section-wrap" id="product" style="background: var(--navy3);">
-        <div class="section-inner">
-            <div class="product-detail">
-                <div class="product-img-area fade-up">
-                    <div class="product-img-box">
-                        <!-- Thay bằng ảnh thật -->
-                        <div class="ph">
-                            🧦
-                            <span>Ảnh chi tiết sản phẩm</span>
-                        </div>
-                        <div class="corner-tag">Chính hãng LIS</div>
-                    </div>
-                </div>
-                <div class="product-specs fade-up" style="transition-delay:.15s">
-                    <div class="eyebrow">Chi tiết sản phẩm</div>
-                    <h2 class="section-heading" style="margin-bottom:32px;">VỚ THỂ THAO<br><span>LIS PRO</span></h2>
-                    <div class="spec-row">
-                        <div class="spec-icon">🧵</div>
-                        <div>
-                            <div class="spec-text-name">Chất liệu</div>
-                            <div class="spec-text-desc">80% Cotton · 15% Spandex · 5% Nylon — co giãn tối đa, mềm mại,
-                                bền bỉ</div>
+        <!-- PRODUCT DETAIL -->
+        <div class="section-wrap" id="product" style="background: var(--navy3);">
+            <div class="section-inner">
+                <div class="product-detail">
+                    <div class="product-img-area fade-up">
+                        <div class="product-img-box">
+                            <!-- Thay bằng ảnh thật -->
+                            <div class="ph">
+                                🧦
+                                <span>Ảnh chi tiết sản phẩm</span>
+                            </div>
+                            <div class="corner-tag">Chính hãng LIS</div>
                         </div>
                     </div>
-                    <div class="spec-row">
-                        <div class="spec-icon">👟</div>
-                        <div>
-                            <div class="spec-text-name">Size</div>
-                            <div class="spec-text-desc">S (35–38) · M (39–42) · L (43–45) — free size co giãn phù hợp
-                                mọi chân</div>
-                        </div>
-                    </div>
-                    <div class="spec-row">
-                        <div class="spec-icon">🎨</div>
-                        <div>
-                            <div class="spec-text-name">Màu sắc</div>
-                            <div class="spec-text-desc">2+ màu đa dạng, phù hợp mọi outfit thể thao</div>
-                        </div>
-                    </div>
-                    <div class="spec-row">
-                        <div class="spec-icon">🏆</div>
-                        <div>
-                            <div class="spec-text-name">Phù hợp với</div>
-                            <div class="spec-text-desc">Bóng đá · Gym · Chạy bộ · Cầu lông · Bóng rổ · Đi bộ hàng ngày
+                    <div class="product-specs fade-up" style="transition-delay:.15s">
+                        <div class="eyebrow">Chi tiết sản phẩm</div>
+                        <h2 class="section-heading" style="margin-bottom:32px;">VỚ THỂ THAO<br><span>LIS PRO</span></h2>
+                        <div class="spec-row">
+                            <div class="spec-icon">🧵</div>
+                            <div>
+                                <div class="spec-text-name">Chất liệu</div>
+                                <div class="spec-text-desc">80% Cotton · 15% Spandex · 5% Nylon — co giãn tối đa, mềm
+                                    mại, bền bỉ</div>
                             </div>
                         </div>
+                        <div class="spec-row">
+                            <div class="spec-icon">👟</div>
+                            <div>
+                                <div class="spec-text-name">Size</div>
+                                <div class="spec-text-desc">S (35–38) · M (39–42) · L (43–45) — free size co giãn phù
+                                    hợp mọi chân</div>
+                            </div>
+                        </div>
+                        <div class="spec-row">
+                            <div class="spec-icon">🎨</div>
+                            <div>
+                                <div class="spec-text-name">Màu sắc</div>
+                                <div class="spec-text-desc">12+ màu đa dạng, phù hợp mọi outfit thể thao</div>
+                            </div>
+                        </div>
+                        <div class="spec-row">
+                            <div class="spec-icon">🏆</div>
+                            <div>
+                                <div class="spec-text-name">Phù hợp với</div>
+                                <div class="spec-text-desc">Bóng đá · Gym · Chạy bộ · Cầu lông · Bóng rổ · Đi bộ hàng
+                                    ngày</div>
+                            </div>
+                        </div>
+                        <a href="#order" class="btn-gold" style="margin-top:8px; display:inline-block;">Đặt hàng ngay
+                            →</a>
                     </div>
-                    <a href="#order" class="btn-gold" style="margin-top:8px; display:inline-block;">Đặt hàng ngay →</a>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- COLORS -->
-    <div class="section-wrap colors-bg" id="colors">
-        <div class="section-inner">
-            <div class="eyebrow">Bộ sưu tập màu sắc</div>
-            <h2 class="section-heading">CHỌN PHONG CÁCH CỦA BẠN</h2>
-            <div class="colors-grid">
-                <!-- <div class="color-card active fade-up" onclick="selectColor(this)">
-                    <div class="color-swatch" style="background:#1a2472;"></div>
-                    <div class="color-name">Navy Blue</div>
-                    <div class="color-sub">Classic LIS</div>
-                </div>
-                <div class="color-card fade-up" style="transition-delay:.05s" onclick="selectColor(this)">
-                    <div class="color-swatch" style="background:#f5a623;"></div>
-                    <div class="color-name">Gold</div>
-                    <div class="color-sub">Signature</div>
-                </div> -->
-                <div class="color-card fade-up" style="transition-delay:.1s" onclick="selectColor(this)">
-                    <div class="color-swatch" style="background:#111111; border-color:#444;"></div>
-                    <div class="color-name">All Black</div>
-                    <div class="color-sub">Tối giản</div>
-                </div>
-                <div class="color-card fade-up" style="transition-delay:.15s" onclick="selectColor(this)">
-                    <div class="color-swatch" style="background:#f5f5f0; border-color:#ccc;"></div>
-                    <div class="color-name">Pure White</div>
-                    <div class="color-sub">Sạch sẽ</div>
-                </div>
-                <!-- <div class="color-card fade-up" style="transition-delay:.2s" onclick="selectColor(this)">
-                    <div class="color-swatch" style="background:#c0392b;"></div>
-                    <div class="color-name">Fire Red</div>
-                    <div class="color-sub">Mạnh mẽ</div>
-                </div>
-                <div class="color-card fade-up" style="transition-delay:.25s" onclick="selectColor(this)">
-                    <div class="color-swatch" style="background:#27ae60;"></div>
-                    <div class="color-name">Sport Green</div>
-                    <div class="color-sub">Năng động</div>
-                </div> -->
-            </div>
-        </div>
-    </div>
-
-    <!-- REVIEWS -->
-    <div class="section-wrap reviews-bg" id="reviews">
-        <div class="section-inner">
-            <div class="eyebrow">Phản hồi thực tế</div>
-            <h2 class="section-heading">KHÁCH HÀNG NÓI GÌ</h2>
-            <div class="reviews-grid">
-                <div class="review-card fade-up">
-                    <div class="review-top">
-                        <div class="review-avatar">MK</div>
-                        <div>
-                            <div class="review-name">Minh Khoa</div>
-                            <div class="review-role">Cầu thủ phong trào · TP.HCM</div>
-                        </div>
+        <!-- COLORS -->
+        <div class="section-wrap colors-bg" id="colors">
+            <div class="section-inner">
+                <div class="eyebrow">Bộ sưu tập màu sắc</div>
+                <h2 class="section-heading">CHỌN PHONG CÁCH<br><span>CỦA BẠN</span></h2>
+                <div class="colors-grid">
+                    <!-- <div class="color-card active fade-up" onclick="selectColor(this)">
+                        <div class="color-swatch" style="background:#1a2472;"></div>
+                        <div class="color-name">Navy Blue</div>
+                        <div class="color-sub">Classic LIS</div>
                     </div>
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">"Mang thử 1 buổi bóng đá là nghiện. Đế dày nên chạy nhẹ hơn hẳn, không đau
-                        gót sau 2 tiếng chơi."</p>
-                </div>
-                <div class="review-card fade-up" style="transition-delay:.1s">
-                    <div class="review-top">
-                        <div class="review-avatar">TN</div>
-                        <div>
-                            <div class="review-name">Thảo Nguyên</div>
-                            <div class="review-role">Runner · Hà Nội</div>
-                        </div>
+                    <div class="color-card fade-up" style="transition-delay:.05s" onclick="selectColor(this)">
+                        <div class="color-swatch" style="background:#f5a623;"></div>
+                        <div class="color-name">Gold</div>
+                        <div class="color-sub">Signature</div>
+                    </div> -->
+                    <div class="color-card fade-up" style="transition-delay:.1s" onclick="selectColor(this)">
+                        <div class="color-swatch" style="background:#111111; border-color:#444;"></div>
+                        <div class="color-name">All Black</div>
+                        <div class="color-sub">Tối giản</div>
                     </div>
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">"Giặt 20 lần rồi mà logo LIS vẫn đẹp, chất vải co giãn vẫn tốt. Mua thêm 5
-                        đôi nữa rồi."</p>
-                </div>
-                <div class="review-card fade-up" style="transition-delay:.2s">
-                    <div class="review-top">
-                        <div class="review-avatar">TA</div>
-                        <div>
-                            <div class="review-name">Tuấn Anh</div>
-                            <div class="review-role">PT · Gym owner</div>
-                        </div>
+                    <div class="color-card fade-up" style="transition-delay:.15s" onclick="selectColor(this)">
+                        <div class="color-swatch" style="background:#f5f5f0; border-color:#ccc;"></div>
+                        <div class="color-name">Pure White</div>
+                        <div class="color-sub">Sạch sẽ</div>
                     </div>
-                    <div class="review-stars">★★★★★</div>
-                    <p class="review-text">"Đặt thử 1 đôi, xài 1 tuần quay lại đặt cả chục đôi cho team gym. Chất lượng
-                        xứng đáng với giá."</p>
+                    <!-- <div class="color-card fade-up" style="transition-delay:.2s" onclick="selectColor(this)">
+                        <div class="color-swatch" style="background:#c0392b;"></div>
+                        <div class="color-name">Fire Red</div>
+                        <div class="color-sub">Mạnh mẽ</div>
+                    </div>
+                    <div class="color-card fade-up" style="transition-delay:.25s" onclick="selectColor(this)">
+                        <div class="color-swatch" style="background:#27ae60;"></div>
+                        <div class="color-name">Sport Green</div>
+                        <div class="color-sub">Năng động</div>
+                    </div> -->
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- CTA -->
-    <section class="cta-section" id="order">
-        <h2>LIFE IS<br>SPORT</h2>
-        <p>Đặt hàng ngay hôm nay</p>
-        <div class="cta-btns">
-            <a href="tel:0xxxxxxxxx" class="btn-navy">📞 Gọi đặt hàng</a>
-            <a href="https://m.me/yourpage" class="btn-outline-dark">💬 Nhắn tin tư vấn</a>
+        <!-- REVIEWS -->
+        <div class="section-wrap reviews-bg" id="reviews">
+            <div class="section-inner">
+                <div class="eyebrow">Phản hồi thực tế</div>
+                <h2 class="section-heading">KHÁCH HÀNG<br><span>NÓI GÌ</span></h2>
+                <div class="reviews-grid">
+                    <div class="review-card fade-up">
+                        <div class="review-top">
+                            <div class="review-avatar">MK</div>
+                            <div>
+                                <div class="review-name">Minh Khoa</div>
+                                <div class="review-role">Cầu thủ phong trào · TP.HCM</div>
+                            </div>
+                        </div>
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"Mang thử 1 buổi bóng đá là nghiện. Đế dày nên chạy nhẹ hơn hẳn, không
+                            đau gót sau 2 tiếng chơi."</p>
+                    </div>
+                    <div class="review-card fade-up" style="transition-delay:.1s">
+                        <div class="review-top">
+                            <div class="review-avatar">TN</div>
+                            <div>
+                                <div class="review-name">Thảo Nguyên</div>
+                                <div class="review-role">Runner · Hà Nội</div>
+                            </div>
+                        </div>
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"Giặt 20 lần rồi mà logo LIS vẫn đẹp, chất vải co giãn vẫn tốt. Mua thêm
+                            5 đôi nữa rồi."</p>
+                    </div>
+                    <div class="review-card fade-up" style="transition-delay:.2s">
+                        <div class="review-top">
+                            <div class="review-avatar">TA</div>
+                            <div>
+                                <div class="review-name">Tuấn Anh</div>
+                                <div class="review-role">PT · Gym owner</div>
+                            </div>
+                        </div>
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">"Đặt thử 1 đôi, xài 1 tuần quay lại đặt cả chục đôi cho team gym. Chất
+                            lượng xứng đáng với giá."</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
+
+        <!-- CTA -->
+        <section class="cta-section" id="order">
+            <h2>LIFE IS<br>SPORT</h2>
+            <p>Đặt hàng ngay hôm nay, đổi trả trong 7 ngày nếu không vừa ý.</p>
+            <div class="cta-btns">
+                <a href="tel:0xxxxxxxxx" class="btn-navy">📞 Gọi đặt hàng</a>
+                <a href="https://m.me/yourpage" class="btn-outline-dark">💬 Nhắn tin tư vấn</a>
+            </div>
+        </section>
+    </main>
 
     <!-- FOOTER -->
     <footer>
         <div class="footer-logo">
-            <img src="uploads/logo_lis.jpg" alt="LIS" onerror="this.style.display='none'">
+            <img src="uploads/logo_lis.jpg" alt="LIS" width="32" height="32" loading="lazy" decoding="async" width="32"
+                height="32" loading="lazy" decoding="async" onerror="this.style.display='none'">
             <div>
                 <!-- <div class="footer-brand">LIS</div> -->
                 <div class="footer-tagline">Life is Sport</div>
             </div>
         </div>
-        <div class="footer-copy">© 2026 Life is Sport. All rights reserved.</div>
+        <div class="footer-copy">© 2025 Life is Sport. All rights reserved.</div>
     </footer>
 
     <script>
-        // Scroll animations
-        const obs = new IntersectionObserver((entries) => {
-            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-        }, { threshold: 0.12 });
-        document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+        // Defer non-critical work until browser is idle
+        function initPage() {
+            // Scroll animations
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+            }, { threshold: 0.12 });
+            document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+        }
 
-        // Color selector
+        // Color selector (needed immediately for interaction)
         function selectColor(card) {
             document.querySelectorAll('.color-card').forEach(c => c.classList.remove('active'));
             card.classList.add('active');
+        }
+
+        // Use requestIdleCallback if available, fallback to setTimeout
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(initPage);
+        } else {
+            setTimeout(initPage, 100);
         }
     </script>
 </body>
