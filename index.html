@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chúc Mừng Sinh Nhật Huyền Trang</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;700;900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink: #FF6B9D;
+      --yellow: #FFD166;
+      --green: #06D6A0;
+      --blue: #118AB2;
+      --red: #EF476F;
+      --orange: #FFB347;
+      --purple: #C77DFF;
+      --lavender: #E0AAFF;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #1a0533 0%, #2d0b5e 40%, #0d2157 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    #confetti { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+
+    .star {
+      position: fixed;
+      z-index: 1;
+      pointer-events: none;
+      animation: starSpin 4s linear infinite;
+    }
+    @keyframes starSpin {
+      from { transform: rotate(0deg) scale(1); }
+      50%  { transform: rotate(180deg) scale(1.35); }
+      to   { transform: rotate(360deg) scale(1); }
+    }
+
+    .balloon {
+      position: fixed;
+      bottom: -80px;
+      z-index: 1;
+      pointer-events: none;
+      animation: floatUp 7s ease-in infinite;
+    }
+    @keyframes floatUp {
+      0%   { transform: translateY(0) rotate(-4deg); opacity: 0; }
+      10%  { opacity: 1; }
+      80%  { opacity: .85; }
+      100% { transform: translateY(-110vh) rotate(8deg); opacity: 0; }
+    }
+
+    .heart {
+      position: fixed;
+      z-index: 1;
+      pointer-events: none;
+      font-size: 1.5rem;
+      animation: heartFloat 6s ease-in infinite;
+      opacity: 0;
+    }
+    @keyframes heartFloat {
+      0%   { transform: translateY(0) scale(.8); opacity: 0; }
+      15%  { opacity: 1; }
+      80%  { opacity: .6; }
+      100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+    }
+
+    .card {
+      position: relative;
+      z-index: 10;
+      background: rgba(30, 10, 55, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 36px;
+      border: 2px solid rgba(199, 125, 255, 0.3);
+      padding: clamp(28px, 6vw, 60px) clamp(20px, 6vw, 64px);
+      max-width: 580px;
+      width: 90vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      box-shadow:
+        0 0 70px 12px rgba(199,125,255,.15),
+        0 0 40px 6px rgba(255,107,157,.12),
+        0 8px 48px rgba(17,138,178,.12),
+        0 2px 12px rgba(0,0,0,.5);
+      animation: popIn .85s cubic-bezier(.22,1.2,.6,1) both;
+    }
+    @keyframes popIn {
+      0%   { transform: scale(.4) rotate(-8deg); opacity: 0; }
+      70%  { transform: scale(1.06) rotate(2deg); opacity: 1; }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+
+    .badge {
+      background: linear-gradient(90deg, var(--purple), var(--pink), var(--yellow));
+      border-radius: 30px;
+      padding: 5px 22px;
+      font-size: .82rem;
+      font-weight: 900;
+      color: #1a0533;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .cake {
+      font-size: clamp(3rem, 10vw, 5.5rem);
+      line-height: 1;
+      animation: bounce 1.5s ease-in-out infinite;
+    }
+
+    .title {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(2rem, 7vw, 4rem);
+      color: var(--lavender);
+      letter-spacing: 2px;
+      text-align: center;
+      animation: glowPulse 2.2s ease-in-out infinite;
+    }
+    @keyframes glowPulse {
+      0%,100% { text-shadow: 0 0 24px var(--purple), 0 0 60px var(--pink), 0 2px 0 #fff; }
+      50%      { text-shadow: 0 0 50px var(--purple), 0 0 110px var(--pink), 0 2px 0 #fff; }
+    }
+
+    .name {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--lavender) 0%, #fff 35%, var(--pink) 60%, var(--yellow) 80%, var(--lavender) 100%);
+      background-size: 500px 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 2.5s linear infinite;
+    }
+    @keyframes shimmer {
+      from { background-position: -500px 0; }
+      to   { background-position:  500px 0; }
+    }
+
+    .divider {
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--purple), var(--pink), transparent);
+      opacity: .5;
+    }
+
+    .message {
+      font-size: clamp(.95rem, 2.5vw, 1.12rem);
+      color: rgba(255,255,255,.9);
+      text-align: center;
+      line-height: 1.8;
+      max-width: 420px;
+      animation: fadeSlideUp 1s .6s both;
+    }
+    .message strong { color: var(--yellow); }
+    .message em { color: var(--lavender); font-style: normal; }
+
+    .emojis {
+      display: flex;
+      gap: 14px;
+      font-size: 1.9rem;
+      animation: fadeSlideUp 1s 1s both;
+    }
+    .emojis span { display: inline-block; }
+    .emojis span:nth-child(1) { animation: bounce 1.20s .00s ease-in-out infinite; }
+    .emojis span:nth-child(2) { animation: bounce 1.35s .12s ease-in-out infinite; }
+    .emojis span:nth-child(3) { animation: bounce 1.50s .24s ease-in-out infinite; }
+    .emojis span:nth-child(4) { animation: bounce 1.65s .36s ease-in-out infinite; }
+    .emojis span:nth-child(5) { animation: bounce 1.80s .48s ease-in-out infinite; }
+    .emojis span:nth-child(6) { animation: bounce 1.95s .60s ease-in-out infinite; }
+
+    .footer {
+      margin-top: 6px;
+      border-top: 1px solid rgba(199,125,255,.2);
+      padding-top: 14px;
+      width: 100%;
+      text-align: center;
+      font-size: .82rem;
+      color: rgba(255,255,255,.45);
+      letter-spacing: 1px;
+      animation: fadeSlideUp 1s 1.3s both;
+    }
+
+    @keyframes bounce {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-13px); }
+    }
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="confetti"></canvas>
+
+<div class="card">
+  <div class="badge">Thành Nhân · TNC</div>
+  <div class="cake">🎂</div>
+  <h1 class="title">Chúc Mừng Sinh Nhật!</h1>
+  <div class="name">🌸 Huyền Trang 🌸</div>
+  <div class="divider"></div>
+  <p class="message">
+    Nhân ngày đặc biệt này, toàn thể đội ngũ <strong>Thành Nhân 6 TNC</strong>
+    xin gửi đến <em> Huyền Trang</em> những lời chúc chân thành và ấm áp nhất! 💜🎉<br><br>
+    Chúc Huyền Trang luôn tươi cười rạng rỡ, tràn đầy sức khỏe,
+    hạnh phúc và thành công trong mọi điều! ✨🌟
+  </p>
+  <div class="emojis">
+    <span>🎁</span><span>🥳</span><span>🎊</span><span>💜</span><span>🌸</span><span>💛</span>
+  </div>
+  <div class="footer">💌 Với tất cả tình cảm từ đội ngũ Thành Nhân TNC</div>
+</div>
+
+<script>
+// ── CONFETTI ──────────────────────────────────────────
+const canvas = document.getElementById('confetti');
+const ctx = canvas.getContext('2d');
+const COLORS = ['#FF6B9D','#FFD166','#06D6A0','#C77DFF','#EF476F','#FFB347','#E0AAFF','#A8EDEA'];
+
+function resize() { canvas.width = innerWidth; canvas.height = innerHeight; }
+resize();
+window.addEventListener('resize', resize);
+
+const pieces = Array.from({length: 140}, () => ({
+  x: Math.random() * innerWidth,
+  y: Math.random() * -300,
+  r: 6 + Math.random() * 9,
+  color: COLORS[Math.floor(Math.random() * COLORS.length)],
+  speed: 2 + Math.random() * 4,
+  swing: -1.5 + Math.random() * 3,
+  angle: Math.random() * Math.PI * 2,
+  angSpeed: -.05 + Math.random() * .1,
+  rect: Math.random() > .5,
+}));
+
+(function loop() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  pieces.forEach(p => {
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.angle);
+    ctx.fillStyle = p.color;
+    ctx.globalAlpha = .88;
+    if (p.rect) ctx.fillRect(-p.r/2, -p.r/2, p.r, p.r * 1.8);
+    else { ctx.beginPath(); ctx.arc(0,0,p.r/2,0,Math.PI*2); ctx.fill(); }
+    ctx.restore();
+    p.y += p.speed;
+    p.x += Math.sin(p.y / 30) * p.swing;
+    p.angle += p.angSpeed;
+    if (p.y > canvas.height + 20) { p.y = -20; p.x = Math.random() * canvas.width; }
+  });
+  requestAnimationFrame(loop);
+})();
+
+// ── STARS ─────────────────────────────────────────────
+Array.from({length: 18}, (_, i) => {
+  const el = document.createElement('div');
+  el.className = 'star';
+  const size = 10 + Math.random()*13;
+  const delay = Math.random()*3;
+  el.style.cssText = `top:${2+Math.random()*93}%;left:${2+Math.random()*96}%;animation-delay:${delay}s;animation-duration:${3+delay}s`;
+  el.innerHTML = `<svg width="${size}" height="${size}" viewBox="0 0 24 24">
+    <polygon points="12,2 15,9 22,9 16,14 18,21 12,17 6,21 8,14 2,9 9,9" fill="${COLORS[i%COLORS.length]}"/>
+  </svg>`;
+  document.body.appendChild(el);
+});
+
+// ── BALLOONS ──────────────────────────────────────────
+[
+  {color:'#C77DFF', left:'5%',  delay:0,   size:60},
+  {color:'#FFD166', left:'14%', delay:1.2, size:50},
+  {color:'#FF6B9D', left:'83%', delay:0.5, size:65},
+  {color:'#06D6A0', left:'92%', delay:2,   size:52},
+  {color:'#E0AAFF', left:'54%', delay:3.5, size:48},
+  {color:'#FFB347', left:'70%', delay:1.8, size:58},
+].forEach(b => {
+  const el = document.createElement('div');
+  el.className = 'balloon';
+  el.style.cssText = `left:${b.left};animation-delay:${b.delay}s`;
+  el.innerHTML = `<svg width="${b.size}" height="${b.size*1.4}" viewBox="0 0 56 78" fill="none">
+    <ellipse cx="28" cy="32" rx="22" ry="28" fill="${b.color}" opacity=".85"/>
+    <ellipse cx="22" cy="22" rx="6" ry="9" fill="white" opacity=".22"/>
+    <path d="M28 60 Q30 67 27 74" stroke="${b.color}" stroke-width="2" fill="none"/>
+    <circle cx="27" cy="75" r="2" fill="${b.color}" opacity=".7"/>
+  </svg>`;
+  document.body.appendChild(el);
+});
+
+// ── FLOATING HEARTS ───────────────────────────────────
+['💜','🌸','💕','✨','💖','🌷'].forEach((emoji, i) => {
+  const el = document.createElement('div');
+  el.className = 'heart';
+  el.textContent = emoji;
+  el.style.cssText = `left:${8+i*15}%;animation-delay:${i*1.0}s;animation-duration:${5+i*0.5}s`;
+  document.body.appendChild(el);
+});
+</script>
+</body>
+</html>
